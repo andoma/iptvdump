@@ -128,6 +128,18 @@ tsinput(int fd)
 }
 
 
+static void
+usage(const char *argv0)
+{
+  fprintf(stderr, "Usage: %s [OPTIONS...]\n\n", argv0);
+  fprintf(stderr, "  -g <group>       IPv4 Multicast group\n");
+  fprintf(stderr, "  -i <iface>       Network interface name\n");
+  fprintf(stderr, "  -p <port>        UDP port\n");
+  fprintf(stderr, "  -P               Enable PCR analysis\n");
+  fprintf(stderr, "\n");
+}
+
+
   
 /**
  * Main loop
@@ -166,7 +178,8 @@ main(int argc, char **argv)
   }
 
   if(port == -1 || group == NULL || iface == NULL) {
-    fprintf(stderr, "Missing arguments\n");
+    usage(argv[0]);
+    fprintf(stderr, " ERROR: Missing arguments\n");
     exit(1);
   }
 
@@ -181,7 +194,7 @@ main(int argc, char **argv)
       perror("poll");
       exit(1);
     } else if(r == 0) {
-      fprintf(stderr, "ERR: No data received\n");
+      fprintf(stderr, "ERROR: No data received\n");
     } else {
       tsinput(fd);
     }
