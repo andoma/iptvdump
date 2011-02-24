@@ -1,0 +1,13 @@
+A simple tool for analysing IPTV streams (in particular timing related stuff)
+
+Only tested and probably only works on Linux systems.
+
+To build:
+
+$ make
+
+To run:
+
+$ obj/iptvdump -g <ipv4group> -i <network interface> -p <udp port>
+
+Good luck
